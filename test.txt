@@ -8,3 +8,4 @@ git checkout dev
 git checkout master
 two git checkout dev
 three git checkout dev
+four git checkout dev
