@@ -1,0 +1,177 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>登录</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script src="/Public/Home/js/rem.js"></script> 
+    <script src="/Public/Home/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/Public/layer_phone/layer_mobile/layer.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="/Public/Home/css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="/Public/Home/css/page.css"/>
+    <link rel="stylesheet" type="text/css" href="/Public/Home/css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="/Public/Home/css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/Public/Home/css/loaders.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/Public/Home/css/loading.css"/>
+    <link rel="stylesheet" type="text/css" href="/Public/Home/slick/slick.css"/>
+	<script type="text/javascript">
+		$(window).load(function(){
+			$(".loading").addClass("loader-chanage")
+			$(".loading").fadeOut(300)
+		})
+	</script>
+	<style>
+		span{
+			color: #ffffff;
+			opacity: 0.5;
+		}
+		.error{
+			color:red;
+		}
+
+	</style>
+</head>
+<!--loading页开始-->
+<div class="loading">
+	<div class="loader">
+        <div class="loader-inner pacman">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+	</div>
+</div>
+<!--loading页结束-->
+	<body>
+		<div class="login clearfloat box-s">
+			<h3>会员登录</h3>
+			<form action="<?php echo U('loginAction');?>" method="post" id="one">
+			<div class="list clearfloat">
+				<ul>
+					<li class="ra3">
+						<p class="fl clearfloat">
+							<span class="opa5"></span>
+							<i class="iconfont icon-yonghuming"></i>
+						</p>
+						<div class="nr clearfloat fl">
+							<span class="opa3"></span>
+							<input type="text" name="tel" id="tel" value="<?php echo ($username?$username:''); ?>" placeholder="请输入手机号" />
+						</div>
+					</li>
+					<li class="ra3">
+						<p class="fl clearfloat">
+							<span class="opa5"></span>
+							<i class="iconfont icon-mima"></i>
+						</p>
+						<div class="nr clearfloat fl">
+							<span class="opa3"></span>
+							<input type="password" name="password" id="password" value="<?php echo ($password?$password:''); ?>" placeholder="登录密码" />
+						</div>
+					</li>
+					<li class="ra3">
+						<p class="fl clearfloat">
+							<span class="opa5"></span>
+							<i class="iconfont icon-yanzhengma"></i>
+						</p>
+						<div class="nr nrtwo clearfloat fl">
+							<span class="opa3"></span>
+							<input type="text" name="verify" id="verify" value="" placeholder="验证码" />
+							<span style="background: none;"><img src="<?php echo U('Help/verify');?>" onclick="this.src=this.src+'?'+Math.random()" alt="" height="100%" width="100%" ></span>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="mima clearfloat">
+				<ul>
+					<li class="fl">
+						<div class="xuan clearfloat fl">
+		    				<div class="radiofour" > 
+							    <label>
+							        <input type="checkbox" name="rem" value="1" checked/>
+							        <div class="option"></div>
+							        <span class="opt-text">记住密码</span>
+							    </label>
+							</div>
+		    			</div>
+					</li>
+					<li class="fr">
+						<a href="verification.html">找回密码？</a>
+					</li>
+				</ul>
+			</div>
+				<input type="hidden" value="<?php echo ($error?$error:''); ?>" id="mes">
+			<div class="login-btn">
+				<label>
+				<button type="submit" style="display: none;">登录</button>
+				<a>
+					登录
+				</a>
+				</label>
+				<a href="<?php echo U('reg');?>" class="btn">
+					<span class="opa5"></span>
+					<samp>注册</samp>
+				</a>
+			</div>
+			</form>
+		</div>
+	</body>
+</html>
+<script>
+	var mes = $("#mes").val();
+	if(mes){
+		layer.open({
+			content: mes
+			,skin: 'msg'
+			,time: 3 //3秒后自动关闭
+		});
+	}
+	var bool1 = false;
+	//用户名失去焦点验证
+	$('#tel').blur(function(){
+		phone = $('#tel').val();
+		if(!(/^1[3456789]\d{9}$/.test(phone))){
+			layer.open({
+				content: '手机号码不正确！'
+				,skin: 'msg'
+				,time: 3 //3秒后自动关闭
+			});
+			bool1 = false;
+		}else{
+			bool1 = true;
+		}
+	})
+	//密码格式失去焦点验证
+	var bool2 = false;
+	$('#password').blur(function(){
+		var yzm = /^[\w]{6,30}$/;
+		if(!yzm.test($('#password').val())){
+			layer.open({
+				content: '密码格式不正确！'
+				,skin: 'msg'
+				,time: 3 //3秒后自动关闭
+			});
+		}else{
+			bool2 = true;
+		}
+	})
+
+	//验证码格式失去焦点验证
+	var bool3 = false;
+	$('#verify').blur(function(){
+		var yzm = /^[\w]{3}$/;
+		if(!yzm.test($('#verify').val())){
+			layer.open({
+				content: '请输入3位验证码！'
+				,skin: 'msg'
+				,time: 3 //3秒后自动关闭
+			});
+		}else{
+			bool3 = true;
+		}
+	})
+
+</script>

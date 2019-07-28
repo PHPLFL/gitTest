@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>列表-悟.空源码分享网 www.5k ym.com</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script src="__PUBLIC__js/rem.js"></script> 
+    <script src="__PUBLIC__js/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__css/page.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__css/loaders.min.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__css/loading.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__slick/slick.css"/>
+<script type="text/javascript">
+	$(window).load(function(){
+		$(".loading").addClass("loader-chanage")
+		$(".loading").fadeOut(300)
+	})
+</script>
+</head>
+<!--loading页开始-->
+<div class="loading">
+	<div class="loader">
+        <div class="loader-inner pacman">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+	</div>
+</div>
+<!--loading页结束-->
+	<body>
+		<!--header star-->
+	    <header class="mui-bar mui-bar-nav" id="header">
+			<a class="btn" href="javascript:history.go(-1)">
+	            <i class="iconfont icon-fanhui"></i>
+	        </a>
+	        <div class="top-sch-box flex-col">
+				<form action="{:U('find')}" method="post">
+					<div class="centerflex">
+						<i class="fdj iconfont icon-sousuo"></i>
+						<input type="hidden" value="{$cid}" name="cid">
+						<input type="text" name="find" id="" value="{$find}" class="sch-txt" placeholder="输入您要搜索的商品" />
+						<input type="submit" value="搜索" style="margin-top: -.4rem; background: none;border: none">
+					</div>
+				</form>
+	            <!--<div class="centerflex">-->
+	                <!--<i class="fdj iconfont icon-sousuo"></i>-->
+	                <!--<input type="text" name="" id="" value="" class="sch-txt" placeholder="输入您要搜索的商品" />-->
+	            <!--</div>-->
+	        </div>
+	        <a class="btn" href="{:U('Index/shopcar')}">
+	            <i class="iconfont icon-gouwuche"></i>
+	            <span>{$num}</span>
+	        </a>
+	    </header>
+		<!--header end-->
+		
+		<div class="warp clearfloat">
+			<div class="lists clearfloat">
+				<div class="top clearfloat">
+					<ul>
+						<li>默认</li>
+						<li>价格<i class="iconfont icon-xiala"></i></li>
+						<li>销量<i class="iconfont icon-xiala"></i></li>
+					</ul>
+				</div>
+				<div class="bottom clearfloat">
+					<foreach name="good" item="v">
+						<div class="lie clearfloat">
+						<a href="{:U('detail')}?gid={$v.id}">
+							<div class="tu clearfloat fl">
+								<img src="__PUBLIC__pic/{$v.pic}"/>
+							</div>
+						</a>
+						<div class="right clearfloat fl">
+							<a href="{:U('detail')}?gid={$v.id}">
+								<p class="tit">{$v.goods_name}</p>
+							</a>
+							<div class="xia clearfloat">
+								<a href="{:U('detail')}?gid={$v.id}">
+									<p class="jifen fl over">￥{$v.price}</p>
+								</a>
+								<span class="fr db"><img src="__PUBLIC__img/jia.png"/></span>
+							</div>
+							<a href="{:U('detail')}?gid={$v.id}">
+								<p class="tit" style="font: 12px sold ; opacity: 0.5">{$v.goods_detail}</p>
+							</a>
+						</div>
+					</div>
+					</foreach>
+				</div>
+			</div>
+		</div>
+		
+		
+		<!--footer star-->
+		<include file="Public/footer"/>
+		<!--footer end-->
+	</body>
+	<script type="text/javascript" src="__PUBLIC__js/jquery-1.8.3.min.js" ></script>
+	<script src="__PUBLIC__js/mui.min.js"></script>
+	<script src="__PUBLIC__js/others.js"></script>
+	<script type="text/javascript" src="__PUBLIC__js/hmt.js" ></script>
+	<script src="__PUBLIC__slick/slick.js" type="text/javascript" ></script>
+	<!--插件-->
+	<link rel="stylesheet" href="__PUBLIC__css/swiper.min.css">
+	<script src="__PUBLIC__js/swiper.jquery.min.js"></script>
+</html>
+<script>
+
+</script>

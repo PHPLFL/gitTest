@@ -1,0 +1,36 @@
+<!--footer star-->
+<footer class="page-footer fixed-footer" id="footer">
+    <input type="hidden" value="{$state}" id="val">
+    <ul id="u">
+        <li>
+            <a href="{:U('Index/index')}">
+                <i class="iconfont icon-shouye"></i>
+                <p>首页</p>
+            </a>
+        </li>
+        <li>
+            <a href="{:U('Index/cation')}">
+                <i class="iconfont icon-icon04"></i>
+                <p>分类</p>
+            </a>
+        </li>
+        <li>
+            <a href="{:U('Index/shopcar')}">
+                <i class="iconfont icon-gouwuche"></i>
+                <p>购物车</p>
+            </a>
+        </li>
+        <li>
+            <a href="{:U('Index/my')}">
+                <i class="iconfont icon-yonghuming"></i>
+                <p>我的</p>
+            </a>
+        </li>
+    </ul>
+</footer>
+<!--footer end-->
+
+<script>
+    var state = $('#val').val();
+    $('#u').children().eq(state).addClass('active');
+</script>

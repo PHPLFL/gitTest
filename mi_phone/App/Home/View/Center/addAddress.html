@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>添加新地址-悟.空源码分享网 www.5k ym.com</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script src="__PUBLIC__js/rem.js"></script> 
+    <script src="__PUBLIC__js/jquery.min.js" type="text/javascript"></script>
+	<script src="/Public/layer_phone/layer_mobile/layer.js"></script>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__css/page.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__css/loaders.min.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__css/loading.css"/>
+
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__city/css/app.css" />
+	<link href="__PUBLIC__city/css/mui.picker.css" rel="stylesheet" />
+	<link href="__PUBLIC__city/css/mui.poppicker.css" rel="stylesheet" />
+<script type="text/javascript">
+	$(window).load(function(){
+		$(".loading").addClass("loader-chanage")
+		$(".loading").fadeOut(300)
+	})
+</script>
+</head>
+<!--loading页开始-->
+<div class="loading">
+	<div class="loader">
+        <div class="loader-inner pacman">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+	</div>
+</div>
+<!--loading页结束-->
+	<body>
+	<header class="mui-bar mui-bar-nav report-header box-s" id="header">
+			<a href="javascript:history.go(-1)"><i class="iconfont icon-fanhui fl"></i></a>
+			<p>添加新地址</p>
+			<span class="fr baocun save" onclick="address()">保存</span>
+	    </header>
+	    <div id="main" class="mui-clearfix add-address">
+	    	<div class="plist clearfloat data">
+				<ul>
+					<li class="clearfloat">
+						<a href="#">
+							<p class="fl">收货人</p>
+							<input type="text" class="fl shuru" name="recipient" id="recipient" value="" />
+						</a>
+					</li>
+					<li class="clearfloat">
+						<a href="#">
+							<p class="fl">联系电话</p>
+							<i class="fr iconfont "></i>
+							<input type="text" class="" name="phone" id="phone" value="" >
+						</a>
+					</li>
+					<li class="clearfloat" id="showCityPicker3">
+						<a href="#"  style="margin-left: 0.1rem">
+							<lable>
+							<p class="fl">所在地区</p>
+							<i class="fr iconfont icon-jiantou1"></i>
+							<input type="text"  style="margin-left: 0rem" class="mui-input-clear" data-input-clear="5" id="city" name="city" required>
+							</lable>
+						</a>
+					</li>
+					<!--<li class="clearfloat">-->
+						<!--<a href="#">-->
+							<!--<p class="fl">所在地区</p>-->
+							<!--<i class="fr iconfont icon-jiantou1"></i>-->
+						<!--</a>-->
+					<!--</li>-->
+					<li class="clearfloat">
+						<a href="#">
+							<p class="fl">街道</p>
+							<i class="fr iconfont icon-jiantou1"></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<textarea name="street" id="street" rows="4" cols="" placeholder="请填写详细地址，不少于5个字" class="textare box-s"></textarea>
+	    	<div class="address-btn clearfloat">
+	    		<span class="szwmr fl">设为默认</span>
+	    		<a href="#" class="toggle toggle--on fr" id="sta"></a>
+	    	</div>
+	    </div>
+	<script src="__PUBLIC__city/js/mui.min.js"></script>
+		<script src="__PUBLIC__city/js/mui.picker.js"></script>
+		<script src="__PUBLIC__city/js/mui.poppicker.js"></script>
+		<script src="__PUBLIC__city/js/city.data.js" type="text/javascript" charset="utf-8"></script>
+		<script src="__PUBLIC__city/js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			(function($, doc) {
+				$.init();
+				$.ready(function() {
+					var cityPicker3 = new $.PopPicker({
+						layer: 3
+					});
+					cityPicker3.setData(cityData3);
+					var showCityPickerButton = doc.getElementById('showCityPicker3');
+					var cityResult3 = doc.getElementById('cityResult3');
+					var city = doc.getElementById('city');
+					showCityPickerButton.addEventListener('tap', function(event) {
+						cityPicker3.show(function(items) {
+							city.value = (items[0] || {}).text + (items[1] || {}).text + (items[2] || {}).text;
+							//返回 false 可以阻止选择框的关闭
+							//return false;
+						});
+					}, false);
+				});
+			})(mui, document);
+		</script>
+	</body>
+	<script type="text/javascript" src="__PUBLIC__js/jquery-1.8.3.min.js" ></script>
+	<script src="__PUBLIC__js/mui.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__js/hmt.js" ></script>
+	<script type="text/javascript" src="__PUBLIC__js/jquery.min.js"></script>
+	<!--默认按钮-->
+	<script type="text/javascript">
+	$('.toggle').click(function(e){
+
+		var toggle = this;
+		
+		e.preventDefault();
+	
+		$(toggle).toggleClass('toggle--on').toggleClass('toggle--off').addClass('toggle--moving');
+
+		setTimeout(function(){
+			$(toggle).removeClass('toggle--moving');
+		}, 200)
+
+	});
+	</script>
+	<input type="hidden" value="{$state}" class="state">
+</html>
+<script>
+	var sta = 0;
+	function address(){
+		recipient = $('#recipient').val();
+		if(!recipient){
+			layer.open({
+				content: '请填写收件人！'
+				,skin: 'msg'
+				,time: 3 //3秒后自动关闭
+			});
+			return false;
+		}
+		phone = $('#phone').val();
+		if(!(/^1[34578]\d{9}$/.test(phone))){
+			layer.open({
+				content: '手机号码有误，请重新填写！'
+				,skin: 'msg'
+				,time: 3 //3秒后自动关闭
+			});
+			return false;
+		}
+		city = $('#city').val();
+		if(!city){
+			layer.open({
+				content: '请选择地区！'
+				,skin: 'msg'
+				,time: 3 //3秒后自动关闭
+			});
+			return false;
+		}
+		street = $('#street').val();
+		if(!street){
+			layer.open({
+				content: '请填写详细地址！'
+				,skin: 'msg'
+				,time: 3 //3秒后自动关闭
+			});
+			return false;
+		}
+		$.post("{:U('addAddressAct')}",{recipient:recipient,phone:phone,city:city,street:street,state:sta},function(brr){
+			if(brr.state){
+				layer.open({
+					content: '添加成功！'
+					,skin: 'msg'
+					,time: 3 //3秒后自动关闭
+				});
+				if($('.state').val()==1){
+					setTimeout(function(){window.location.href="{:U('Center/chooseAddress')}"},2600);
+				}else{
+					setTimeout(function(){window.location.href="{:U('addressList')}"},2600);
+
+				}
+			}else{
+				layer.open({
+					content: '添加失败！'
+					,skin: 'msg'
+					,time: 3 //3秒后自动关闭
+				});
+			}
+		},'json')
+	}
+	$('.toggle').click(function () {
+		if($('#sta').hasClass('toggle--off')){
+			sta = 1;
+		}else{
+			sta = 0;
+		}
+	})
+</script>

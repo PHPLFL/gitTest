@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>全部订单-悟.空源码分享网 www.5k ym.com</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script src="__PUBLIC__js/rem.js"></script> 
+    <script src="__PUBLIC__js/jquery.min.js" type="text/javascript"></script>
+	<script src="/Public/layer_phone/layer_mobile/layer.js"></script>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__css/page.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__css/loaders.min.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__css/loading.css"/>
+<script type="text/javascript">
+	$(window).load(function(){
+		$(".loading").addClass("loader-chanage")
+		$(".loading").fadeOut(300)
+	})
+</script>
+</head>
+<!--loading页开始-->
+<div class="loading">
+	<div class="loader">
+        <div class="loader-inner pacman">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+	</div>
+</div>
+<!--loading页结束-->
+	<body>
+		<header class="mui-bar mui-bar-nav report-header box-s" id="header">
+			<a href="javascript:history.go(-1)"><i class="iconfont icon-fanhui fl"></i></a>
+			<p>我的订单</p>
+	    </header>
+		<div id="main" class="mui-clearfix">
+			<div class="order-top clearfloat">
+				<ul>
+					<li class="clearfloat"><a href="{:U('myOrder')}">全部</a></li>
+					<li class="clearfloat"><a href="{:U('needPay')}">待付款</a></li>
+					<li class="clearfloat"><a href="{:U('needSend')}">待发货</a></li>
+					<li class="clearfloat cur"><a href="{:U('needGet')}">待收货</a></li>
+					<li class="clearfloat"><a href="{:U('needSpeak')}">待评价</a></li>
+				</ul>
+			</div>
+			<foreach name="order" item="v" key="k">
+				<div class="order-list clearfloat">
+					<a href="{:U('orderDetail')}?oid={$v.orderid}">
+					<p class="ordernum box-s">
+						订单  {$v.ordersn}
+						<span>待付款</span>
+					</p>
+					<foreach name="good[$k]" item="g">
+						<div class="list clearfloat fl box-s">
+								<div class="tu fl clearfloat">
+									<img src="/Public/Home/pic/{$g.pic}"/>
+								</div>
+								<div class="middle clearfloat fl">
+									<p class="tit">{$g.goods_name}</p>
+									<p class="fu-tit">{$g.goods_detail}</p>
+									<p class="price clearfloat">
+										<span class="xprice fl">¥{$g.price}</span>
+										<!--<span class="yprice fl">¥308</span>-->
+										<span class="shu">×{$g.good_num}</span>
+									</p>
+								</div>
+						</div>
+					</foreach>
+					</a>
+					<input type="hidden" value="{$v.orderid}" id="inp">
+					<a class="gopay-btn fr inp">确认收货</a>
+				</div>
+			</foreach>
+			<style type="text/css">
+				.more-btn{width: 25%; padding: 3% 0; text-align: center; background-color: #00CC7D; color: #fff; font-size: .5rem; margin: 5% auto;}
+			</style>
+			<a href="#" class="more-btn db ra5">更多</a>
+		</div>
+	</body>
+	<script type="text/javascript" src="__PUBLIC__js/jquery-1.8.3.min.js" ></script>
+	<script src="__PUBLIC__js/fastclick.js"></script>
+	<script src="__PUBLIC__js/mui.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__js/hmt.js" ></script>
+</html>
+<script>
+	$('.inp').click(function () {
+		oid = $('#inp').val();
+		$.get("{:U('Center/trueGood')}",{oid:oid},function () {
+			//询问框
+			layer.open({
+				content: '已确认收货是否马上评价？'
+				,btn: ['去评价', '取消']
+				,yes: function(){
+					location.href="{:U('needSpeak')}";
+				}
+				,no: function () {
+					location.reload();
+				}
+			});
+		},'json')
+	})
+	function a() {
+
+
+		window.location.reload();
+	}
+</script>

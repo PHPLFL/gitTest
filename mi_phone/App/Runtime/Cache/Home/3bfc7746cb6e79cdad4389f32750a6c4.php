@@ -1,0 +1,199 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>提交订单-悟.空源码分享网 www.5k ym.com</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script src="/Public/Home/js/rem.js"></script> 
+    <script src="/Public/Home/js/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="/Public/Home/css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="/Public/Home/css/page.css"/>
+    <link rel="stylesheet" type="text/css" href="/Public/Home/css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="/Public/Home/css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/Public/Home/css/loaders.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/Public/Home/css/loading.css"/>
+<script type="text/javascript">
+	$(window).load(function(){
+		$(".loading").addClass("loader-chanage")
+		$(".loading").fadeOut(300)
+	})
+</script>
+	<style>
+		.pwd-box{
+			width:310px;
+			padding-left: 1px;
+			position: relative;
+			border: 1px solid #9f9fa0;
+			border-radius: 3px;
+			over-flow:hidden
+		}
+		.pwd-box input[type="tel"]{
+			width: 99%;
+			height: 45px;
+			color: transparent;
+			position: absolute;
+			top: 0;
+			left: 0;
+			border: none;
+			font-size: 18px;
+			opacity: 0;
+			z-index: 1;
+			letter-spacing: 35px;
+		}
+		.fake-box input{
+			width: 44px;
+			height: 48px;
+			border: none;
+			border-right: 1px solid #e5e5e5;
+			text-align: center;
+			font-size: 30px;
+		}
+		.fake-box input:nth-last-child(1){
+			border:none;
+		}
+	</style>
+	<script src="http://zeptojs.com/zepto.min.js"></script>
+</head>
+<!--loading页开始-->
+<div class="loading">
+	<div class="loader">
+        <div class="loader-inner pacman">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+	</div>
+</div>
+<!--loading页结束-->
+	<body>
+		<header class="mui-bar mui-bar-nav report-header box-s" id="header">
+			<a href="<?php echo U('Center/orderDetail');?>?oid=<?php echo ($oid); ?>"><i class="iconfont icon-fanhui fl"></i></a>
+			<p>提交订单</p>
+	    </header>
+	    <div id="main" class="mui-clearfix contaniner sorder">	    	
+	    	<div class="warning clearfloat box-s">
+    			提示：请在24小时内完成在线支付，逾期将视为订单无效
+    		</div>
+    		<div class="odernum clearfloat">
+    			<ul>
+    				<li>您的订单号：<?php echo ($ordersn); ?></li>
+    				<li>应付金额：<span>￥<?php echo ($price); ?></span></li>
+    			</ul>
+    		</div>
+    		<div class="pay-method clearfloat">
+    			<ul>
+    				<li>请选择支付方式</li>
+    			</ul>
+    		</div>
+	    	<div class="addlist clearfloat">
+	    		<div class="bottom clearfloat box-s">
+	    			<section class="shopcar clearfloat">
+						<div class="radio radiosss fr"> 
+						    <label>
+						        <input type="radio" name="sex" value="">
+						        <div class="option"></div>
+						    </label>
+						</div>
+						<div class="sorder-list clearfloat fl">
+							<i class="iconfont icon-weixinzhifu fl"></i>
+							<div class="zuo fl">
+								<p class="tit">微信支付</p>
+								<p class="fu-tit">亿万用户的选择，更快更安全</p>
+							</div>							
+						</div>
+					</section>
+	    		</div>
+	    		<div class="bottom clearfloat box-s">
+	    			<section class="shopcar clearfloat">
+						<div class="radio radiosss fr"> 
+						    <label>
+						        <input type="radio" name="sex" value="">
+						        <div class="option"></div>
+						    </label>
+						</div>
+						<div class="sorder-list clearfloat fl">
+							<i class="iconfont icon-zhifubao fl"></i>
+							<div class="zuo fl">
+								<p class="tit">支付宝</p>
+								<p class="fu-tit">客户端支持最便捷！可银行卡支付！</p>
+							</div>							
+						</div>
+					</section>
+	    		</div>
+	    		<div class="bottom clearfloat box-s">
+	    			<section class="shopcar clearfloat">
+						<div class="radio fr"> 
+						    <label>
+						        <input type="radio" name="sex" value="">
+						        <div class="option"></div>
+						    </label>
+						</div>
+						<div class="sorder-list clearfloat fl">
+							<i class="iconfont icon-yinxingqia fl"></i>
+							<div class="zuo fl">
+								<p class="tit">银行卡</p>
+								<p class="fu-tit">需要先开通网银</p>
+							</div>							
+						</div>
+					</section>
+	    		</div>
+	    	</div>
+	    	<a href="<?php echo U('Center/payAction');?>?oid=<?php echo ($oid); ?>" class="address-add fl">
+	    	<!--<a onClick="toshare()" class="address-add fl">-->
+	     		确认支付
+	     	</a>
+	    </div>
+		<!--这里是弹出购物车内容-->
+		<div class="am-share" style="width: 100%;">
+			<div class="am-share-sns box-s" style="width: 100%; height: 300px;">
+				<div class="pwd-box">
+					<input type="tel" maxlength="6" class="pwd-input" id="pwd-input">
+					<div class="fake-box">
+						<input type="password" readonly="">
+						<input type="password" readonly="">
+						<input type="password" readonly="">
+						<input type="password" readonly="">
+						<input type="password" readonly="">
+						<input type="password" readonly="">
+					</div>
+				</div>
+			</div>
+			<a class="shop-btn db cha" >确定</a>
+			<input type="hidden" value="<?php echo ($good["id"]); ?>" id="gid">
+		</div>
+	</body>
+	<script type="text/javascript" src="/Public/Home/js/jquery-1.8.3.min.js" ></script>
+	<script src="/Public/Home/js/fastclick.js"></script>
+	<script src="/Public/Home/js/mui.min.js"></script>
+	<script type="text/javascript" src="/Public/Home/js/hmt.js" ></script>
+<script type="text/javascript" src="/Public/Home/js/shopcar.js" ></script>
+	<script type="text/javascript">
+		$(".shopcar-checkbox label").on('touchstart',function(){
+			if($(this).hasClass('shopcar-checkd')){
+				$(".shopcar-checkbox label").removeClass("shopcar-checkd")
+			}else{
+				$(".shopcar-checkbox label").addClass("shopcar-checkd")
+			}
+		})
+		var $input = $(".fake-box input");
+		$("#pwd-input").on("input", function() {
+			var pwd = $(this).val().trim();
+			for (var i = 0, len = pwd.length; i < len; i++) {
+				$input.eq("" + i + "").val(pwd[i]);
+			}
+			$input.each(function() {
+				var index = $(this).index();
+				if (index >= len) {
+					$(this).val("");
+				}
+			});
+			if (len == 6) {
+				//执行其他操作
+			}
+		});
+	</script>
+</html>

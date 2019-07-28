@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>确认订单-悟.空源码分享网 www.5k ym.com</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script src="__PUBLIC__js/rem.js"></script> 
+    <script src="__PUBLIC__js/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__css/page.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__css/loaders.min.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__css/loading.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__slick/slick.css"/>
+<script type="text/javascript">
+	$(window).load(function(){
+		$(".loading").addClass("loader-chanage")
+		$(".loading").fadeOut(300)
+	})
+</script>
+</head>
+<!--loading页开始-->
+<div class="loading">
+	<div class="loader">
+        <div class="loader-inner pacman">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+	</div>
+</div>
+<!--loading页结束-->
+	<body>
+		<!--header star-->
+		<header class="mui-bar mui-bar-nav" id="header">
+			<a class="btn" href="javascript:history.go(-1)">
+	            <i class="iconfont icon-fanhui"></i>
+	        </a>
+	        <div class="top-sch-box top-sch-boxtwo flex-col">
+	                      确认订单
+	        </div>
+	    </header>
+	    <!--header end-->
+		<form action="{:U('makeOrder')}" method="post">
+	    <div class="warp warptwo clearfloat">
+	    	<div class="confirm clearfloat">
+	    		<div class="add clearfloat box-s">
+	    			<a href="{:U('Center/chooseAddress')}">
+		    			<div class="left clearfloat fl">
+		    				<i class="iconfont icon-dizhi1"></i>
+		    			</div>
+		    			<div class="middle clearfloat fl">
+							<input type="hidden" name="address" value="{$address.id}">
+		    				<p class="tit">
+		    					收货人：{$address.name}&nbsp;&nbsp;&nbsp;&nbsp;{$address.phone}
+		    				</p>
+		    				<p class="fu-tit over2">
+		    					收货地址：{$address.city}{$address.home}
+		    				</p>
+		    			</div>
+		    			<div class="left clearfloat fr">
+		    				<i class="iconfont icon-jiantou1"></i>
+		    			</div>
+	    			</a>
+	    		</div>
+	    		<div class="lie clearfloat">
+					<foreach name="good" item="v">
+					<a href="detail.html">
+						<div class="tu clearfloat fl">
+							<img src="/Public/Home/pic/{$v.pic}" width="80" height="70"/>
+						</div>
+					</a>
+					<div class="right clearfloat fl">
+						<a href="detail.html">
+							<input type="hidden" name="cid[]" value="{$v.cid}">
+							<p class="tit over">{$v.goods_name}</p>
+							<p class="fu-tit">颜色：金色  内存：1287G</p>
+						</a>
+						<div class="xia clearfloat">
+							<a href="detail.html">
+								<p class="jifen fl over">{$v.price}</p>
+							</a>
+							<span class="fr db">×{$v.goods_num}</span>
+						</div>
+					</div>
+					</foreach>
+				</div>
+				<div class="gmshu clearfloat box-s fl">
+		     	</div>
+		     	<div class="gmshu gmshutwo clearfloat box-s fl">
+					<div class="gcontent clearfloat">
+						<p class="fl">配送方式</p>
+			     		<div class="you clearfloat fr">
+			     			<span>快递 免邮</span>
+			     			<i class="iconfont icon-jiantou1"></i>
+			     		</div>
+					</div>		     		
+		     	</div>
+		     	<div class="gmshu gmshutwo clearfloat box-s fl">
+					<div class="gcontent clearfloat">
+						<p class="fl">发票信息</p>
+			     		<div class="you clearfloat fr">
+			     			<div class="xuan clearfloat">
+			     				<div class="radiotwo" > 
+								    <label>
+								        <input type="radio" name="fapiao" value="" />
+								        <div class="option"></div>
+								        <span class="opt-text">需要发票</span>
+								    </label>
+								</div>
+			     			</div>
+		    				<div class="xuan clearfloat">
+			     				<div class="radiotwo" > 
+								    <label>
+								        <input type="radio" name="fapiao" value="" />
+								        <div class="option"></div>
+								        <span class="opt-text">不需要发票</span>
+								    </label>
+								</div>
+			     			</div>
+			     		</div>
+					</div>		     		
+		     	</div>
+		     	<div class="gmshu gmshuthree clearfloat box-s fl">
+					<div class="gcontent clearfloat">
+						<p class="fl">买家留言</p>
+			     		<div class="you clearfloat fl">
+			     			<input type="text" name="remark" id="" value="" class="text" placeholder="选填 对本次交易需求给商家留言" />
+			     		</div>
+					</div>		     		
+		     	</div>
+		     	<div class="gmshu clearfloat box-s fl">
+					<p class="fr">共{$num}件商品   合计<samp>￥{$price}</samp></p>
+		     	</div>
+		     	<div class="integral clearfloat fl box-s">
+		     		<div class="zuo clearfloat fl">
+		     			积分&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可用积分2446
+		     		</div>
+		     		<div class="you clearfloat fr">
+		     			<div class="xuan clearfloat">
+		     				<div class="radiothree" > 
+							    <label>
+							        <input type="checkbox" name="fapiao" value="" />
+							        <div class="option"></div>
+							    </label>
+							</div>
+		     			</div>
+		     		</div>
+		     	</div>
+	    	</div>
+	    </div>	    
+	    
+		<!--settlement star-->
+	    <div class="settlement clearfloat">
+	    	<div class="zuo clearfloat fl box-s">
+				<input type="hidden" name="price" value="{$price}">
+	    		共<span>{$num}</span>件  总金额：<span>￥{$price}</span>
+	    	</div>
+			<label>
+			<input type="submit" value="提交" style="display: none;">
+	    	<a  class="fl db">
+	    		提交订单
+	    	</a>
+			</label>
+	    </div>
+	    <!--settlement end-->
+		</form>
+		<!--footer star-->
+		<include file="Public/footer"/>
+		<!--footer end-->
+	</body>
+	<script type="text/javascript" src="__PUBLIC__js/jquery-1.8.3.min.js" ></script>
+	<script src="__PUBLIC__js/mui.min.js"></script>
+	<script src="__PUBLIC__js/others.js"></script>
+	<script type="text/javascript" src="__PUBLIC__js/hmt.js" ></script>
+	<script src="__PUBLIC__slick/slick.js" type="text/javascript" ></script>
+	<!--插件-->
+	<link rel="stylesheet" href="__PUBLIC__css/swiper.min.css">
+	<script src="__PUBLIC__js/swiper.jquery.min.js"></script>
+</html>
